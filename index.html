@@ -3,15 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <title>METAR Pi</title>
+    <link rel="stylesheet" href="css/metar-pi.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
-<body>
-<script src="js/checkwx.js"></script>
-<br>
-<div class="text-center">
-    <b>METAR:</b> <span id="metar">metar should appear here</span>
-<br>
-    <b>TAF:</b> <span id="taf">taf should appear here</span>
-</div>
+<body class="bg-dark text-light">
+    <script src="js/checkwx.js"></script>
+    <br>
+    <h1 id="station" class="text-center">N/A</h1>
+    <h6 id="stationName" class="text-center">N/A</h6>
+    <div class="compass">
+        <div class="direction">
+            <p id="windDirection">
+                N/A
+                <span id="windSpeed">
+                    N/A
+                </span>
+            </p>
+        </div>
+        <div id="arrow" class="arrow"></div>
+    </div>
+    <br />
+    <div class="mx-4 text-center">
+        <div id="flightCategory" class="alert" role="alert">
+            No Flight Category Available
+        </div>
+    </div>
+    <br />
+    <div class="mx-4 text-center">
+        <svg class="bi bi-cloud" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" d="M4.887 7.2l-.964-.165A2.5 2.5 0 1 0 3.5 12h10a1.5 1.5 0 0 0 .237-2.981L12.7 8.854l.216-1.028a4 4 0 1 0-7.843-1.587l-.185.96zm9.084.341a5 5 0 0 0-9.88-1.492A3.5 3.5 0 1 0 3.5 13h9.999a2.5 2.5 0 0 0 .394-4.968c.033-.16.06-.324.077-.49z"/>
+        </svg>
+        <div id="clouds" class="alert" role="alert">
+            No Cloud Data Available
+        </div>
+    </div>
+
+
+
 </body>
 </html>
