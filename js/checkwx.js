@@ -1,7 +1,7 @@
-var apiKey = "your-api-key";
-var icaoCode = "EGSH";
+const API_KEY = "your-api-key";
+const ICAO_CODE = "EGSH";
 
-var decodedMetarXhr = new XMLHttpRequest();
+let decodedMetarXhr = new XMLHttpRequest();
 
 decodedMetarXhr.addEventListener("readystatechange", function () {
     if(this.readyState === 4) {
@@ -10,29 +10,21 @@ decodedMetarXhr.addEventListener("readystatechange", function () {
 })
 
 function getDecodedMetar() {
-    decodedMetarXhr.open("GET", "https://api.checkwx.com/metar/" + icaoCode + "/decoded");
-    decodedMetarXhr.setRequestHeader("X-API-KEY", apiKey);
+    decodedMetarXhr.open("GET", "https://api.checkwx.com/metar/" + ICAO_CODE + "/decoded");
+    decodedMetarXhr.setRequestHeader("X-API-KEY", API_KEY);
     decodedMetarXhr.send();
-}
-
-function metarSuccess(response) {
-    if (response.results > 0) {
-        var metar = response.data[0];
-        document.getElementById('metar').innerText = metar;
-    } else {
-        document.getElementById('metar').innerText = 'No results returned from API';
-    }
 }
 
 function decodedMetarSuccess(response) {
     if (response.results > 0) {
-        document.getElementById('station').innerText = icaoCode;
+        document.getElementById('station').innerText = ICAO_CODE;
         document.getElementById('stationName').innerText = response.data[0].station.name
-        var windDirection = response.data[0].wind.degrees;
-        var windSpeed = response.data[0].wind.speed_kts;
-        var flightCategory = response.data[0].flight_category;
-        var cloudBase = response.data[0].ceiling.feet
-        var cloudType = response.data[0].ceiling.text.toUpperCase()
+        let windDirection = response.data[0].wind.degrees;
+        let windSpeed = response.data[0].wind.speed_kts;
+        let flightCategory = response.data[0].flight_category;
+        let cloudBase = response.data[0].ceiling.feet
+        let cloudType = response.data[0].ceiling.text.toUpperCase()
+        let observed = response.data[0].observed
         document.getElementById('flightCategory').innerText = flightCategory;
         switch (flightCategory) {
             case "VFR":
@@ -54,7 +46,8 @@ function decodedMetarSuccess(response) {
         document.getElementById('windDirection').childNodes[0].nodeValue = windDirection + "°";
         document.getElementById('clouds').innerText = cloudType + " @ " + cloudBase + "ft";
         document.getElementById('arrow').style.transform = "rotate(" + windDirection + "deg)"
+        document.getElementById('observedDateTime').innerText = observed
     }
 }
-
-setInterval(getDecodedMetar(), 90000);
+getDecodedMetar();
+setInterval(getDecodedMetar, 300000);
