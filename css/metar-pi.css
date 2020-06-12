@@ -11,6 +11,10 @@
     src: url(https://fonts.gstatic.com/s/dosis/v17/HhyJU5sn9vOmLxNkIwRSjTVNWLEJN7Ml2xMB.ttf) format('truetype');
 }
 
+body {
+    width: 300px;
+}
+
 .compass {
     display: block;
     margin: auto;
